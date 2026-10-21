@@ -1,0 +1,30 @@
+.github/workflows/python.yml
+  h_85ea3c1869612c 1-51
+.pre-commit-config.yaml
+  h_85ea3c1869612c 1-2,4-5,7-40
+.python-version
+  h_85ea3c1869612c 1
+Makefile
+  h_85ea3c1869612c 1-51
+bankdata_setup.py
+  h_85ea3c1869612c 1-530
+pyproject.toml
+  h_85ea3c1869612c 1-90
+requirements.txt
+  h_85ea3c1869612c 1-5
+tests/test_bankdata_setup.py
+  h_85ea3c1869612c 1-302
+uv.lock
+  h_85ea3c1869612c 1-669
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "389c53da35d607fbe2fdfbb02c472a661c786354",
+  "prompts": {},
+  "humans": {
+    "h_85ea3c1869612c": {
+      "author": "Mark B. Sigler <markbsigler@gmail.com>"
+    }
+  }
+}
