@@ -1,0 +1,90 @@
+[project]
+name = "cics-banking-bankdata-setup"
+version = "0.1.0"
+description = "Python equivalent of the CBSA banking sample BANKDATA JCL"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+
+[dependency-groups]
+dev = [
+  "pytest>=8.0,<10",
+  "pytest-cov>=7.0,<8",
+  "ruff>=0.17,<1",
+  "mypy>=1.19,<2",
+  "pre-commit>=4.0,<5",
+]
+
+# This is a standalone utility in a Java/CICS sample, not an installable package.
+[tool.uv]
+package = false
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["bankdata_setup.py", "tests"]
+
+[tool.ruff.lint]
+select = [
+  "E",   # pycodestyle errors
+  "W",   # pycodestyle warnings
+  "F",   # pyflakes
+  "I",   # isort
+  "N",   # pep8-naming
+  "UP",  # pyupgrade
+  "B",   # flake8-bugbear
+  "C4",  # flake8-comprehensions
+  "SIM", # flake8-simplify
+  "RUF", # ruff-specific rules
+  "PT",  # flake8-pytest-style
+  "RET", # flake8-return
+  "ISC", # implicit string concatenation
+  "PIE", # flake8-pie
+]
+ignore = [
+  "E501", # line length handled by the formatter
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["bankdata_setup"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "lf"
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_unreachable = true
+show_error_codes = true
+pretty = true
+files = ["bankdata_setup.py", "tests"]
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+pythonpath = ["."]
+python_files = ["test_*.py"]
+addopts = [
+  "-ra",
+  "--strict-markers",
+  "--strict-config",
+  "--cov=bankdata_setup",
+  "--cov-report=term-missing",
+  "--cov-fail-under=90",
+]
+filterwarnings = ["error"]
+
+[tool.coverage.run]
+source = ["bankdata_setup"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "pragma: no cover",
+  "if __name__ == .__main__.:",
+]

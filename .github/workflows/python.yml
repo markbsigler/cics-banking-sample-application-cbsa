@@ -1,0 +1,51 @@
+name: Python checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - bankdata_setup.py
+      - tests/**
+      - pyproject.toml
+      - uv.lock
+      - .github/workflows/python.yml
+  pull_request:
+    paths:
+      - bankdata_setup.py
+      - tests/**
+      - pyproject.toml
+      - uv.lock
+      - .github/workflows/python.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: astral-sh/setup-uv@18d369b23da25a81e9458561248e1aafff6a70fa # v10.3.1
+        with:
+          enable-cache: true
+          python-version: "3.13"
+
+      - name: Install dependencies
+        run: uv sync --locked
+
+      - name: Lint
+        run: uv run ruff check bankdata_setup.py tests
+
+      - name: Format check
+        run: uv run ruff format --check bankdata_setup.py tests
+
+      - name: Type check
+        run: uv run mypy
+
+      - name: Test
+        run: uv run pytest

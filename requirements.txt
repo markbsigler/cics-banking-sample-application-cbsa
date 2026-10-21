@@ -1,0 +1,5 @@
+# The BANKDATA setup script uses only the Python standard library.
+#
+# Development dependencies (pytest, pytest-cov, ruff, mypy, pre-commit) are
+# declared in pyproject.toml and locked in uv.lock. Use `uv sync` (or
+# `make setup`) instead of installing from this file.
